@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+from flask import *
+from camera import Camera
+from flask_bootstrap import Bootstrap
+
+app = Flask(__name__) 
+
+#home page
+@app.route('/')
+def index():
+	return render_template('index.html')
+
+def gen(camera):
+	while True:
+		frame = camera.get_frame()
+		yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+	return Response(gen(Camera()),mimetype='multipart/x-mixed-replace; boundary=frame')
+
+if __name__ == '__main__':
+	app.run(host='0.0.0.0', debug=True, threaded=True)
+
