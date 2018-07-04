@@ -37,18 +37,20 @@ class Header extends React.Component{
 class ButtonContainer extends React.Component{
 	render(){
 		return(
-			<table>
-				<tbody>
-					<tr>
-						<td>
-							<Button value="Camera Up" />
-							<Button value="Camera Down" />
-							<Button value="Camera Left" />
-							<Button value="Camera Right" />
-						</td>
-					</tr>
-				</tbody>
-			</table>)
+			<div className="container">
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<Button value="Camera Up" />
+								<Button value="Camera Down" />
+								<Button value="Camera Left" />
+								<Button value="Camera Right" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>)
 	}
 }
 
