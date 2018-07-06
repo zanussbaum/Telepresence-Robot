@@ -5,4 +5,4 @@ This project utilizes a Flask, Python, React, and HTML/CSS to render a webpage t
 
 It currently only streams the video onto the webpage. 
 
-The webpage utilizes the Flask video version from Miguel Grinberg here: https://github.com/miguelgrinberg/flask-video-streaming.
+The webpage utilizes the Flask video streaming from Miguel Grinberg here: https://github.com/miguelgrinberg/flask-video-streaming.
