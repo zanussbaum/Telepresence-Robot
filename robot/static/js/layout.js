@@ -47,30 +47,73 @@ class ButtonContainer extends React.Component{
 }
 
 class Video extends React.Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			baseSite: window.location.href
-		}
-	}
-
 	render(){
-		const feed = "video_feed";
-
-		const path = this.state.baseSite + feed;
-
 		return(
-			<img src={path} />
+			<img src={this.props.value}ß />
 			);
 	}
 }
+class VideoContainer extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			baseSite: window.location.href,
+			isRunning: false
+		};
+	}
 
+	play(){
+		const feed = "video_feed";
+		if(this.state.isRunning){
+			return;
+		}
+		this.setState({
+			baseSite: this.state.baseSite + feed,
+			isRunning: !this.state.isRunning
+		});
+
+	}
+
+	pause(){
+		if(!this.state.isRunning){
+			return;
+		}
+		this.setState({
+			baseSite: window.location.href,
+			isRunning: !this.state.isRunning
+		});
+	}
+	render(){
+		const path = this.state.baseSite;
+		return(
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<Video  value={path} />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<Button value="Start" onClick={() =>this.play()} />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<Button value="Stop" onClick={() => this.pause()} />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			);
+	}
+}
 class Body extends React.Component{
 	render(){
 		return(
 		<div className="body">
 			<div className="video">
-				<Video />
+				<VideoContainer />
 				<ButtonContainer />
 			</div>
 		</div>	
