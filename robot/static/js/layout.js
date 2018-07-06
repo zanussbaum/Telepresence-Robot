@@ -1,5 +1,6 @@
 'use strict';
 
+
 function Title(){
 		return(
 			<h1>Welcome to the Telepresence Robot</h1>
@@ -25,15 +26,6 @@ class Header extends React.Component{
 		
 }
 
-{/*class Video extends React.Component{
-	render(){
-		return(
-			<img src="{{ url_for('video_feed') }}" />
-			)
-	}
-
-}*/}
-
 class ButtonContainer extends React.Component{
 	render(){
 		return(
@@ -54,11 +46,31 @@ class ButtonContainer extends React.Component{
 	}
 }
 
+class Video extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			baseSite: window.location.href
+		}
+	}
+
+	render(){
+		const feed = "video_feed";
+
+		const path = this.state.baseSite + feed;
+
+		return(
+			<img src={path} />
+			);
+	}
+}
+
 class Body extends React.Component{
 	render(){
 		return(
 		<div className="body">
 			<div className="video">
+				<Video />
 				<ButtonContainer />
 			</div>
 		</div>	
