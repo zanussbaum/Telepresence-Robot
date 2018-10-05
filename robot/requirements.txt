@@ -1,5 +1,0 @@
-numpy==1.13.3
-Flask_Bootstrap==3.3.7.1
-Flask==1.0.2
-opencv_python==3.4.1.15
-greenlet==0.4.13

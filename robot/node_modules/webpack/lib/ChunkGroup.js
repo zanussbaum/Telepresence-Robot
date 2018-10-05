@@ -407,7 +407,7 @@ class ChunkGroup {
 		if (this.chunks.length < otherGroup.chunks.length) return 1;
 		const a = this.chunks[Symbol.iterator]();
 		const b = otherGroup.chunks[Symbol.iterator]();
-		// eslint-disable-next-line
+		// eslint-disable-next-line no-constant-condition
 		while (true) {
 			const aItem = a.next();
 			const bItem = b.next();
@@ -442,7 +442,7 @@ class ChunkGroup {
 			list.sort((a, b) => {
 				const cmp = b.order - a.order;
 				if (cmp !== 0) return cmp;
-				// TOOD webpack 5 remove this check of compareTo
+				// TODO webpack 5 remove this check of compareTo
 				if (a.group.compareTo) {
 					return a.group.compareTo(b.group);
 				}

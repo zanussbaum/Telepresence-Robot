@@ -49,7 +49,7 @@ class ButtonContainer extends React.Component{
 class Video extends React.Component{
 	render(){
 		return(
-			<img src={this.props.value}ß />
+			<img src={this.props.value} />
 			);
 	}
 }

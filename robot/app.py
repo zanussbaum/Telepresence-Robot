@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from flask import *
 from camera import Camera
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__) 
 
