@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response
 from gpiozero import Robot
+#gpio will only work on raspberry pi or if remote
+#connections enabled 
 from camera import Camera
 
 app = Flask(__name__) 
@@ -42,7 +44,7 @@ def go_forward():
 @app.route('/back')
 def go_backward():
 	robot = setup_robot()
-	robot.backward()
+	robot.backward(.5)
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', debug=True, threaded=True)
