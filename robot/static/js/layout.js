@@ -25,8 +25,38 @@ class Header extends React.Component{
 		}
 		
 }
+class MoveRobot extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			baseSite: window.location.href
+		};
+	}
+	left(){
+		const left = "left"
+		this.setState({
+			baseSite: this.state.baseSite + left
+		})
+	}
+	right(){
+		const right = "right"
+		this.setState({
+			baseSite: this.state.baseSite + right
+		})
+	}
 
-class ButtonContainer extends React.Component{
+	forward(){
+		const forward = "forward"
+		this.setState({
+			baseSite: this.state.baseSite + forward
+		})
+	}
+	back(){
+		const back = "back"
+		this.setState({
+			baseSite: this.state.baseSite + back
+		})
+	}
 	render(){
 		return(
 			<div className="container">
@@ -34,10 +64,10 @@ class ButtonContainer extends React.Component{
 					<tbody>
 						<tr>
 							<td>
-								<Button value="Camera Up" />
-								<Button value="Camera Down" />
-								<Button value="Camera Left" />
-								<Button value="Camera Right" />
+								<Button value="Left" onClick={()=>this.left()}/>
+								<Button value="Right" onClick={()=>this.right()}/>
+								<Button value="Forward" onClick={()=>this.forward()} />
+								<Button value="Back" onClick={()=>this.back()} />
 							</td>
 						</tr>
 					</tbody>
@@ -46,6 +76,7 @@ class ButtonContainer extends React.Component{
 	}
 }
 
+
 class Video extends React.Component{
 	render(){
 		return(
@@ -53,6 +84,8 @@ class Video extends React.Component{
 			);
 	}
 }
+
+
 class VideoContainer extends React.Component{
 	constructor(props){
 		super(props);
@@ -114,7 +147,7 @@ class Body extends React.Component{
 		<div className="body">
 			<div className="video">
 				<VideoContainer />
-				<ButtonContainer />
+				<MoveRobot/>
 			</div>
 		</div>	
 		)
