@@ -1,24 +1,14 @@
-import cv2 as cv
-import numpy as np
+import time
 from base_camera import BaseCamera
+
+
 class Camera(BaseCamera):
-	video_source = 0
+    """An emulated camera implementation that streams a repeated sequence of
+    files 1.jpg, 2.jpg and 3.jpg at a rate of one frame per second."""
+    imgs = [open(f + '.jpg', 'rb').read() for f in ['1', '2', '3']]
 
-	@staticmethod
-	#setting video source to something else, initially set to 0 
-	def set_video_source(source):
-		Camera.video_source = source
-
-	@staticmethod
-	def frames():
-		camera = cv.VideoCapture(Camera.video_source)
-
-		if not camera.isOpened():
-			raise RuntimeError('Could not start camera')
-
-		while True:
-			#get next frame
-
-			retVal, img = camera.read()
-
-			yield cv.imencode('.jpg', img)[1].tobytes()
+    @staticmethod
+    def frames():
+        while True:
+            time.sleep(1)
+            yield Camera.imgs[int(time.time()) % 3]
