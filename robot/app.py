@@ -13,7 +13,7 @@ except:
     from camera_opencv import Camera
 
 
-async_mode = None
+async_mode = "threading"
 
 app = Flask(__name__) 
 app.config['SECRET_KEY'] = 'secret!'
