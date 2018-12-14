@@ -1,63 +1,41 @@
- <!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		 <!-- Required meta tags -->
-    	<meta charset="utf-8">
-		<title>
-			Video Streaming test 
-		</title>
+<head>
+  <title>Flask_Chat_App</title>
+</head>
+<body>
 
-	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-	
-	<!-- Don't use this in production: -->
-	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-	
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-	</head>
-	<body>
-	<div id="root"></div>
-	<div id="video-container"></div>
-	  <!-- Load our React component. -->
-	  <script type="text/babel" src="/static/js/layout.js"></script>
-	  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-	<!-- creating the client to server connection with socket.io-->
-	<script type="text/javascript" charset="utf-8">
-	var socket = io.connect('http://' + document.domain + ':' + location.port);
-	
+  <img id="feed">
 
-	
-    socket.on('connect', function() {
-		var video;
-		navigator.getUserMedia = ( navigator.getUserMedia ||
-                             navigator.webkitGetUserMedia ||
-                             navigator.mozGetUserMedia ||
-                             navigator.msGetUserMedia);
-							 if (navigator.getUserMedia) {
-           navigator.getUserMedia (
-			   
-              // constraints
-              {
-                 video: true,
-                 audio: false
-              },
-              // successCallback
-              function(localMediaStream) {
-                 video = document.querySelector('video');
-                 video.src = window.URL.createObjectURL(localMediaStream);
-                 webcamStream = localMediaStream;
-              },
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+  <script type="text/javascript">
+	 var socket = io.connect('http://' + document.domain + ':' + location.port);
+	 socket.on( 'connect', function() {
+		socket.emit( 'connection', {
+		  data: 'User Connected'
+		} )
+	 } );
+	 socket.on('ping from server', function(){
+		 console.log("got message from server");
+		 socket.emit('pong from client',{
+			 source: "{{url_for('video_feed')}}"
+		 })
+	 });
 
-              // errorCallback
-              function(err) {
-                 console.log("The following error occured: " + err);
-              }
-           );
-        } else {
-           console.log("getUserMedia not supported");
-        }
-		socket.emit('client_video', {data: video})
-	});
-	</script>
-	</body>
+	 socket.on('pong from client', function(){
+		 console.log('got message from other client');
+	 });
+
+	 socket.on('video from client', function(msg){
+		 console.log(msg);
+		if( typeof msg.source !== 'undefined' ) {
+			var image = document.getElementById('feed');
+			image.src = msg.source;
+		}
+	 });
+  </script>
+
+</body>
 </html>
