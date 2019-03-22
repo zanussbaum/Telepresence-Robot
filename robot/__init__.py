@@ -1,1 +1,1 @@
-from Adafruit import PWM
+from Adafruit_PWM_Servo_Driver import PWM
